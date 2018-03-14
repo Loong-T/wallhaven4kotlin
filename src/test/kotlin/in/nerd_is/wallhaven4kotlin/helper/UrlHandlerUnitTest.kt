@@ -12,18 +12,22 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
-package `in`.nerd_is.wallhaven4kotlin.model
+package `in`.nerd_is.wallhaven4kotlin.helper
+
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.MatcherAssert.assertThat
+import org.junit.Test
 
 /**
- * Created by Xuqiang ZHENG on 18/3/9.
+ * @author Xuqiang ZHENG on 18/3/14.
  */
-data class Resolution(
-  val width: Int,
-  val height: Int
-) {
-  var altTitle: String? = null
-  val ratio = width.toFloat() / height
+class UrlHandlerUnitTest {
+  @Test
+  fun testWallpaperUrl_allRight() {
+    val url = UrlHandler.getWallpaperUrl(333898)
+    assertThat("url equals", url,
+      equalTo("https://alpha.wallhaven.cc/wallpaper/333898"))
+  }
 }

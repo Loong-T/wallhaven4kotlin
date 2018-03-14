@@ -35,12 +35,4 @@ data class Wallpaper(
   val viewCount: Long,
   val favCount: Long,
   val fullUrl: String
-) {
-  val thumbnailUrl: String
-    get() = THUMBNAIL_TEMPLATE.format(id)
-
-  companion object {
-    private const val THUMBNAIL_TEMPLATE =
-      "https://alpha.wallhaven.cc/wallpapers/thumb/orig/th-%ld.jpg"
-  }
-}
+) : BasePaper(id)

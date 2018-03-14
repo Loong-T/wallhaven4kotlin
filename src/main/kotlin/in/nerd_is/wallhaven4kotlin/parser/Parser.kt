@@ -6,5 +6,5 @@ import org.jsoup.nodes.Document
  * @author Xuqiang ZHENG on 18/3/13.
  */
 interface Parser<out T> {
-  fun parse(doc: Document): T
+  fun parseDoc(doc: Document): T
 }

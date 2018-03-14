@@ -26,7 +26,7 @@ object ColorParser : Parser<List<Color>> {
 
   private const val selector = ".color-palette .color a"
 
-  override fun parse(doc: Document): List<Color> {
+  override fun parseDoc(doc: Document): List<Color> {
     val elements = doc.select(selector)
 
     return elements.map { it.attr("href") }

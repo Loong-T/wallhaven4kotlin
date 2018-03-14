@@ -12,18 +12,17 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
-package `in`.nerd_is.wallhaven4kotlin.model
+package `in`.nerd_is.wallhaven4kotlin.helper
 
 /**
- * Created by Xuqiang ZHENG on 18/3/9.
+ * @author Xuqiang ZHENG on 18/3/14.
  */
-data class Resolution(
-  val width: Int,
-  val height: Int
-) {
-  var altTitle: String? = null
-  val ratio = width.toFloat() / height
+object UrlHandler {
+
+  private const val BASE_URL = "https://alpha.wallhaven.cc"
+  private const val WALLPAPER_SEGMENT = "/wallpaper"
+
+  fun getWallpaperUrl(id: Long) = "$BASE_URL$WALLPAPER_SEGMENT/$id"
 }

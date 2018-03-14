@@ -31,17 +31,17 @@ class ColorUnitTest {
   }
 
   @Test(expected = IllegalArgumentException::class)
-  fun testNewColorFromHex_hexLengthTooShort_throwIllegalArgument() {
+  fun testNewColorFromHex_hexLengthTooShort_illegalArgument() {
     Color.new("fff")
   }
 
   @Test(expected = IllegalArgumentException::class)
-  fun testNewColorFromHex_hexLengthTooLong_throwIllegalArgument() {
+  fun testNewColorFromHex_hexLengthTooLong_illegalArgument() {
     Color.new("00ffffff")
   }
 
   @Test(expected = IllegalArgumentException::class)
-  fun testNewColorFromHex_invalidHexChar_throwIllegalArgument() {
+  fun testNewColorFromHex_invalidHexChar_illegalArgument() {
     Color.new("ggffgg")
   }
 }

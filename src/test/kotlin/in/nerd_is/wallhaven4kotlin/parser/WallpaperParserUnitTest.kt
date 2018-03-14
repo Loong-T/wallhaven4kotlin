@@ -17,6 +17,7 @@
 package `in`.nerd_is.wallhaven4kotlin.parser
 
 import `in`.nerd_is.wallhaven4kotlin.model.Purity
+import `in`.nerd_is.wallhaven4kotlin.util.getRes
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.collection.IsEmptyCollection.empty
@@ -28,11 +29,11 @@ import org.junit.Test
 /**
  * @author Xuqiang ZHENG on 18/3/13.
  */
-class ParserUnitTest {
+class WallpaperParserUnitTest {
 
   @Test
   fun testParseResolution_allRight() {
-    val resolution = ResolutionParser.parse(doc)
+    val resolution = ResolutionParser.parseDoc(doc)
 
     assertThat("not null", resolution, notNullValue())
     assertThat("width is right", resolution.width, equalTo(1920))
@@ -43,14 +44,14 @@ class ParserUnitTest {
 
   @Test
   fun testParseColor_allRight() {
-    val colors = ColorParser.parse(doc)
+    val colors = ColorParser.parseDoc(doc)
 
     assertThat("not empty", colors, not(empty()))
   }
 
   @Test
   fun testParseTag_allRight() {
-    val tags = TagParser.parse(doc)
+    val tags = TagParser.parseDoc(doc)
 
     assertThat("has 8 tags", tags.size, equalTo(8))
     assertThat("tag purity is sfw", tags[0].purity, equalTo(Purity.Sfw))
@@ -58,14 +59,14 @@ class ParserUnitTest {
 
   @Test
   fun testParsePurity_allRight() {
-    val purity = PurityParser.parse(doc)
+    val purity = PurityParser.parseDoc(doc)
 
     assertThat("purity is sfw", purity, equalTo(Purity.Sfw))
   }
 
   @Test
   fun testParseUser_allRight() {
-    val user = UserParser.parse(doc)
+    val user = UserParser.parseDoc(doc)
 
     assertThat("name matches", user.name, equalTo("ConsistentHypocrite"))
     assertThat("avatar is valid url", user.avatarThumbnail,
@@ -74,7 +75,7 @@ class ParserUnitTest {
 
   @Test
   fun testParseWallpaper_allRight() {
-    val wallpaper = WallpaperParser.parse(doc)
+    val wallpaper = WallpaperParser.parseDoc(doc)
 
     assertThat("not null", wallpaper, notNullValue())
   }
@@ -85,8 +86,7 @@ class ParserUnitTest {
 
     @BeforeClass @JvmStatic
     fun init() {
-      val res = this::class.java.classLoader.getResource("wallpaper.html")
-      doc = Jsoup.parse(res.readText())
+      doc = Jsoup.parse(getRes(this::class, "wallpaper.html").readText())
     }
   }
 }

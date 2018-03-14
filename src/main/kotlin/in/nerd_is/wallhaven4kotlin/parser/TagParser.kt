@@ -16,7 +16,7 @@
 
 package `in`.nerd_is.wallhaven4kotlin.parser
 
-import `in`.nerd_is.wallhaven4kotlin.helper.altText
+import `in`.nerd_is.wallhaven4kotlin.helper.altTitle
 import `in`.nerd_is.wallhaven4kotlin.model.Purity
 import `in`.nerd_is.wallhaven4kotlin.model.Tag
 import org.jsoup.nodes.Document
@@ -28,7 +28,7 @@ object TagParser : Parser<List<Tag>> {
 
   private const val selector = "#tags .tag"
 
-  override fun parse(doc: Document): List<Tag> {
+  override fun parseDoc(doc: Document): List<Tag> {
     val elements = doc.select(selector)
     val tags = ArrayList<Tag>(elements.size)
 
@@ -42,7 +42,7 @@ object TagParser : Parser<List<Tag>> {
         .first()
       val nameElem = elem.selectFirst(".tagname")
       val name = nameElem.text()
-      val altText = nameElem.altText()
+      val altText = nameElem.altTitle()
 
       tags.add(Tag(id, name, purity, altText))
     }

@@ -16,15 +16,35 @@
 
 package `in`.nerd_is.wallhaven4kotlin.parser
 
-import `in`.nerd_is.wallhaven4kotlin.model.Purity
+import `in`.nerd_is.wallhaven4kotlin.util.getRes
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.empty
+import org.hamcrest.Matchers.not
+import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
+import org.junit.BeforeClass
+import org.junit.Test
 
-object PurityParser : Parser<Purity> {
+/**
+ * @author Xuqiang ZHENG on 18/3/14.
+ */
+class ListPaperUnitTest {
 
-  private const val selector = "#wallpaper-purity-form input[checked=checked]"
+  @Test
+  fun testParseList_allRight() {
+    val list = ListParser.parseDoc(doc)
 
-  override fun parseDoc(doc: Document): Purity {
-    return Purity.valueOf(doc.selectFirst(selector).`val`().capitalize())
+    assertThat("list not empty", list, not(empty()))
   }
 
+  companion object {
+
+    lateinit var doc: Document
+
+    @BeforeClass
+    @JvmStatic
+    fun init() {
+      doc = Jsoup.parse(getRes(this::class, "list.html").readText())
+    }
+  }
 }

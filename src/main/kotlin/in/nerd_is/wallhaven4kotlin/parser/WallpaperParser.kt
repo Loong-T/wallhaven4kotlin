@@ -27,14 +27,19 @@ import java.text.SimpleDateFormat
  */
 object WallpaperParser : Parser<Wallpaper> {
 
-//  private const val URL = "/wallpaper/"
+  const val WALLPAPER_SELECTOR = "#wallpaper"
 
-  override fun parse(doc: Document): Wallpaper {
-    val resolution = ResolutionParser.parse(doc)
-    val colors = ColorParser.parse(doc)
-    val tags = TagParser.parse(doc)
-    val purity = PurityParser.parse(doc)
-    val uploader = UserParser.parse(doc)
+  override fun parseDoc(doc: Document): Wallpaper {
+
+    val paperElem = doc.selectFirst(WALLPAPER_SELECTOR)
+    val id = paperElem.attr("data-wallpaper-id").toLong()
+    val fullUrl = paperElem.attr("src")
+
+    val resolution = ResolutionParser.parseDoc(doc)
+    val colors = ColorParser.parseDoc(doc)
+    val tags = TagParser.parseDoc(doc)
+    val purity = PurityParser.parseDoc(doc)
+    val uploader = UserParser.parseDoc(doc)
 
     val dlElem = doc.selectFirst("[data-storage-id='showcase-info'] > dl")
 
@@ -68,16 +73,8 @@ object WallpaperParser : Parser<Wallpaper> {
       }
     }
 
-    val paperElem = doc.selectFirst("#wallpaper")
-    val fullUrl = paperElem.attr("src")
-    val id = paperElem.attr("data-wallpaper-id").toLong()
-
     return Wallpaper(id, resolution, colors, tags, purity, uploader,
       date, category, size, viewCount, favCount, fullUrl)
   }
-
-//  fun get(id: Long): Wallpaper {
-//    val doc = Jsoup.connect(BASE_URL + URL + id).get()
-//  }
 
 }

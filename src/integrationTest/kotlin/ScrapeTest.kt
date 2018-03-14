@@ -12,18 +12,31 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
-package `in`.nerd_is.wallhaven4kotlin.model
+import `in`.nerd_is.wallhaven4kotlin.scrape.Scrape
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
+import org.junit.Test
+
+import org.junit.Assert.*
 
 /**
- * Created by Xuqiang ZHENG on 18/3/9.
+ * @author Xuqiang ZHENG on 18/3/14.
  */
-data class Resolution(
-  val width: Int,
-  val height: Int
-) {
-  var altTitle: String? = null
-  val ratio = width.toFloat() / height
+class ScrapeTest {
+
+  @Test
+  fun testGetWallpaper_allRight() {
+    val id = 333898L
+    val wallpaper = Scrape.get(333898)
+
+    assertThat("wallpaper not null", wallpaper, notNullValue())
+    assertThat("wallpaper id equals", wallpaper.id, equalTo(id))
+  }
+
+  @Test(expected = IllegalArgumentException::class)
+  fun testGetWallpaper_badId_illegalArgument() {
+    Scrape.get(1)
+  }
 }

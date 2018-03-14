@@ -10,10 +10,16 @@ object ResolutionParser : Parser<Resolution> {
 
   private const val selector = ".showcase-resolution"
 
-  override fun parse(doc: Document): Resolution {
+  override fun parseDoc(doc: Document): Resolution {
     val element = doc.selectFirst(selector)
     val title = element.attr("original-title")
-    val list = element.text().split('x').map(String::trim)
-    return Resolution(list[0].toInt(), list[1].toInt(), title)
+    val res = parseString(element.text())
+    res.altTitle = title
+    return res
+  }
+
+  fun parseString(str: String): Resolution {
+    val sizes = str.split('x').map { it.trim().toInt() }
+    return Resolution(sizes[0], sizes[1])
   }
 }

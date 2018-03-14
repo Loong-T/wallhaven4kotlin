@@ -26,7 +26,7 @@ object UserParser : Parser<User> {
 
   private const val selector = ".showcase-uploader"
 
-  override fun parse(doc: Document): User {
+  override fun parseDoc(doc: Document): User {
     val elem = doc.selectFirst(selector)
     val name = elem.selectFirst(".username").text()
     val avatar = "https:" + elem.selectFirst("img").attr("src")
