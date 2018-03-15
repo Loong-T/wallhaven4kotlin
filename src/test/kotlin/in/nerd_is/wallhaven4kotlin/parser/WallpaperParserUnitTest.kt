@@ -54,14 +54,14 @@ class WallpaperParserUnitTest {
     val tags = TagParser.parseDoc(doc)
 
     assertThat("has 8 tags", tags.size, equalTo(8))
-    assertThat("tag purity is sfw", tags[0].purity, equalTo(Purity.Sfw))
+    assertThat("tag purity is sfw", tags[0].purity, equalTo(Purity.SFW))
   }
 
   @Test
   fun testParsePurity_allRight() {
     val purity = PurityParser.parseDoc(doc)
 
-    assertThat("purity is sfw", purity, equalTo(Purity.Sfw))
+    assertThat("purity is sfw", purity, equalTo(Purity.SFW))
   }
 
   @Test

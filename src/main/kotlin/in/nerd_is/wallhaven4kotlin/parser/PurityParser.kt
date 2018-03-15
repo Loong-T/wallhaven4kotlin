@@ -24,7 +24,7 @@ object PurityParser : Parser<Purity> {
   private const val selector = "#wallpaper-purity-form input[checked=checked]"
 
   override fun parseDoc(doc: Document): Purity {
-    return Purity.valueOf(doc.selectFirst(selector).`val`().capitalize())
+    return Purity.valueOf(doc.selectFirst(selector).`val`().toUpperCase())
   }
 
 }

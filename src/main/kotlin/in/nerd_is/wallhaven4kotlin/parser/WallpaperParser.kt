@@ -57,7 +57,7 @@ object WallpaperParser : Parser<Wallpaper> {
 
       when (child.text().trim()) {
         "Category" -> {
-          val categoryName = child.nextElementSibling().text().capitalize()
+          val categoryName = child.nextElementSibling().text().toUpperCase()
           category = Category.valueOf(categoryName)
         }
         "Size" -> {

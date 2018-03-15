@@ -38,7 +38,7 @@ object TagParser : Parser<List<Tag>> {
         .split(" ")
         .map { it.substringAfter('-', "") }
         .filter { it != "" }
-        .map { Purity.valueOf(it.capitalize()) }
+        .map { Purity.valueOf(it.toUpperCase()) }
         .first()
       val nameElem = elem.selectFirst(".tagname")
       val name = nameElem.text()

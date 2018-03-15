@@ -20,5 +20,5 @@ package `in`.nerd_is.wallhaven4kotlin.model
  * @author Xuqiang ZHENG on 18/3/13.
  */
 enum class Category {
-  General, Anime, People
+  GENERAL, ANIME, PEOPLE
 }

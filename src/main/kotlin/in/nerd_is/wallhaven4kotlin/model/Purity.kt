@@ -21,5 +21,5 @@ package `in`.nerd_is.wallhaven4kotlin.model;
  * Created by Xuqiang ZHENG on 18/3/9.
  */
 enum class Purity {
-  Sfw, Sketchy, Nsfw
+  SFW, SKETCHY, NSFW
 }

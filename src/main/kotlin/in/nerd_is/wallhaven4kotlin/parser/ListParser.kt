@@ -48,7 +48,7 @@ object ListParser : Parser<List<Thumbnail>> {
         .map { it.substringAfter('-', "") }
         .filter { it.isNotEmpty() }
       for (item in classNames) {
-        val name = item.capitalize()
+        val name = item.toUpperCase()
         when (name) {
           in enumNames<Purity>() -> purity = Purity.valueOf(name)
           in enumNames<Category>() -> category = Category.valueOf(name)
