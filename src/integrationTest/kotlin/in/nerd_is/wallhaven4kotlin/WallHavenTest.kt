@@ -14,23 +14,24 @@
  * limitations under the License.
  */
 
-import `in`.nerd_is.wallhaven4kotlin.scrape.Scrape
-import org.hamcrest.CoreMatchers.equalTo
-import org.hamcrest.CoreMatchers.notNullValue
-import org.jsoup.HttpStatusException
-import org.junit.Test
+package `in`.nerd_is.wallhaven4kotlin
 
-import org.junit.Assert.*
+import `in`.nerd_is.wallhaven4kotlin.model.enums.Sorting
+import `in`.nerd_is.wallhaven4kotlin.query.query
+import org.hamcrest.CoreMatchers.*
+import org.hamcrest.collection.IsEmptyCollection.empty
+import org.junit.Assert.assertThat
+import org.junit.Test
 
 /**
  * @author Xuqiang ZHENG on 18/3/14.
  */
-class ScrapeTest {
+class WallHavenTest {
 
   @Test
   fun testGetWallpaper_allRight() {
     val id = 333898L
-    val wallpaper = Scrape.get(333898)
+    val wallpaper = WallHaven.getWallpaper(333898)
 
     assertThat("wallpaper not null", wallpaper, notNullValue())
     assertThat("wallpaper id equals", wallpaper.id, equalTo(id))
@@ -38,6 +39,23 @@ class ScrapeTest {
 
   @Test(expected = IllegalArgumentException::class)
   fun testGetWallpaper_badId_illegalArgument() {
-    Scrape.get(1)
+    WallHaven.getWallpaper(1) // invalid wallpaper id
+  }
+
+  @Test
+  fun testGetWallpaperList_randomQuery_allRight() {
+    val query = query {
+      sorting = Sorting.RANDOM
+      keywords = ""
+    }
+    val list = WallHaven.search(query)
+
+    assertThat("list not empty", list, not(empty()))
+  }
+
+  @Test
+  fun testGetRandomList_allRight() {
+    val list = WallHaven.random()
+    assertThat("list not empty", list, not(empty()))
   }
 }

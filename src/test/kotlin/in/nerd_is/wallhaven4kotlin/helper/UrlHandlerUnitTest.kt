@@ -31,7 +31,7 @@ import org.junit.Test
 class UrlHandlerUnitTest {
   @Test
   fun testWallpaperUrl_allRight() {
-    val url = UrlHandler.getWallpaperUrl(333898)
+    val url = UrlHandler.fromWallpaperId(333898)
     assertThat(
       "url equals", url,
       equalTo("https://alpha.wallhaven.cc/wallpaper/333898")

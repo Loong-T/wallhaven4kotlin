@@ -16,31 +16,28 @@
 
 package `in`.nerd_is.wallhaven4kotlin.query
 
+import `in`.nerd_is.wallhaven4kotlin.Configuration.Companion.DEFAULT_CATEGORY
+import `in`.nerd_is.wallhaven4kotlin.Configuration.Companion.DEFAULT_ORDER
+import `in`.nerd_is.wallhaven4kotlin.Configuration.Companion.DEFAULT_PURITY
+import `in`.nerd_is.wallhaven4kotlin.Configuration.Companion.DEFAULT_SORTING
 import `in`.nerd_is.wallhaven4kotlin.model.enums.Category
 import `in`.nerd_is.wallhaven4kotlin.model.enums.Order
 import `in`.nerd_is.wallhaven4kotlin.model.enums.Purity
 import `in`.nerd_is.wallhaven4kotlin.model.enums.Sorting
-import `in`.nerd_is.wallhaven4kotlin.util.allOf
 import `in`.nerd_is.wallhaven4kotlin.util.enumSetOf
+import java.util.EnumSet
 
 /**
  * @author Xuqiang ZHENG on 18/3/15.
  */
-
-fun query(init: Query.() -> Unit): Query {
-  val query = Query()
-  query.init()
-  return query
-}
-
-class Query {
-
-  var keywords = ""
-  var page = 0L
-  var categories = DEFAULT_CATEGORY
-  var purities = DEFAULT_PURITY
-  var sorting = Sorting.RELEVANCE
-  var order = Order.DESCENDING
+class Query(
+  var keywords: String = "",
+  var page: Long = 1L,
+  var categories: EnumSet<Category> = DEFAULT_CATEGORY,
+  var purities: EnumSet<Purity> = DEFAULT_PURITY,
+  var sorting: Sorting = DEFAULT_SORTING,
+  var order: Order = DEFAULT_ORDER
+) {
 
   fun category(vararg categories: Category) {
     this.categories = enumSetOf(*categories)
@@ -52,11 +49,11 @@ class Query {
 
   class Builder {
     private var keywords = ""
-    private var page = 0L
+    private var page = 1L
     private var categories = DEFAULT_CATEGORY
     private var purities = DEFAULT_PURITY
-    private var sorting = Sorting.RELEVANCE
-    private var order = Order.DESCENDING
+    private var sorting = DEFAULT_SORTING
+    private var order = DEFAULT_ORDER
 
     fun keywords(keywords: String): Builder {
       this.keywords = keywords
@@ -89,19 +86,14 @@ class Query {
     }
 
     fun build(): Query {
-      val query = Query()
-      query.keywords = keywords
-      query.page = page
-      query.categories = categories
-      query.purities = purities
-      query.sorting = sorting
-      query.order = order
-      return query
+      return Query(keywords, page, categories, purities, sorting, order)
     }
   }
 
-  companion object {
-    val DEFAULT_CATEGORY = allOf<Category>()
-    val DEFAULT_PURITY = enumSetOf(Purity.SFW, Purity.SKETCHY)
-  }
+}
+
+fun query(init: Query.() -> Unit): Query {
+  val query = Query()
+  query.init()
+  return query
 }

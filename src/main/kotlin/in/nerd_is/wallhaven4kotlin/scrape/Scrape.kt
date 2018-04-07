@@ -16,14 +16,15 @@
 
 package `in`.nerd_is.wallhaven4kotlin.scrape
 
-import `in`.nerd_is.wallhaven4kotlin.helper.UrlHandler
+import `in`.nerd_is.wallhaven4kotlin.model.Thumbnail
 import `in`.nerd_is.wallhaven4kotlin.model.Wallpaper
+import `in`.nerd_is.wallhaven4kotlin.parser.ListParser
 import `in`.nerd_is.wallhaven4kotlin.parser.WallpaperParser
-import `in`.nerd_is.wallhaven4kotlin.parser.WallpaperParser.WALLPAPER_SELECTOR
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
+import java.lang.IllegalArgumentException
 
 /**
  * @author Xuqiang ZHENG on 18/3/14.
@@ -32,16 +33,32 @@ object Scrape {
 
   private val client = OkHttpClient()
 
-  fun get(id: Long): Wallpaper {
-    return WallpaperParser.parseDoc(scrapeWallpaperPage(id))
+  fun scrapeWallpaper(url: String): Wallpaper {
+    return WallpaperParser.parseDoc(fetchWallpaperPage(url))
   }
 
-  private fun scrapeWallpaperPage(id: Long): Document {
-    val request = Request.Builder().url(UrlHandler.getWallpaperUrl(id)).build()
+  fun scrapeList(url: String): List<Thumbnail> {
+    return ListParser.parseDoc(fetchListPage(url))
+  }
+
+  private fun fetchDoc(url: String): Document {
+    val request = Request.Builder().url(url).build()
     val response = client.newCall(request).execute()
-    val document = Jsoup.parse(response.body()?.string())
-    if (document.selectFirst(WALLPAPER_SELECTOR) == null)
-      throw IllegalArgumentException("Wallpaper with id $id do not exists")
+    return Jsoup.parse(response.body()?.string())
+  }
+
+  private fun fetchWallpaperPage(url: String): Document {
+    val document = fetchDoc(url)
+    if (WallpaperParser.isNotValid(document))
+      throw IllegalArgumentException("Wallpaper with url $url do not exists")
+
+    return document
+  }
+
+  private fun fetchListPage(url: String): Document {
+    val document = fetchDoc(url)
+    if (ListParser.isNotValid(document))
+      throw IllegalArgumentException("List with url $url do not exists")
 
     return document
   }

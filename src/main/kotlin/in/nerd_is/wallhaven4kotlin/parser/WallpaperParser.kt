@@ -16,8 +16,8 @@
 
 package `in`.nerd_is.wallhaven4kotlin.parser
 
-import `in`.nerd_is.wallhaven4kotlin.model.enums.Category
 import `in`.nerd_is.wallhaven4kotlin.model.Wallpaper
+import `in`.nerd_is.wallhaven4kotlin.model.enums.Category
 import `in`.nerd_is.wallhaven4kotlin.util.Constant.DATE_FORMAT
 import `in`.nerd_is.wallhaven4kotlin.util.enumValueOfIgnoreCase
 import org.jsoup.nodes.Document
@@ -28,7 +28,11 @@ import java.text.SimpleDateFormat
  */
 object WallpaperParser : Parser<Wallpaper> {
 
-  const val WALLPAPER_SELECTOR = "#wallpaper"
+  private const val WALLPAPER_SELECTOR = "#wallpaper"
+
+  fun isNotValid(doc: Document): Boolean {
+    return doc.selectFirst(WALLPAPER_SELECTOR) == null
+  }
 
   override fun parseDoc(doc: Document): Wallpaper {
 

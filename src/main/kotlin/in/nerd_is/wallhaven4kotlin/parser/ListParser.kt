@@ -16,9 +16,9 @@
 
 package `in`.nerd_is.wallhaven4kotlin.parser
 
+import `in`.nerd_is.wallhaven4kotlin.model.Thumbnail
 import `in`.nerd_is.wallhaven4kotlin.model.enums.Category
 import `in`.nerd_is.wallhaven4kotlin.model.enums.Purity
-import `in`.nerd_is.wallhaven4kotlin.model.Thumbnail
 import `in`.nerd_is.wallhaven4kotlin.util.enumNames
 import `in`.nerd_is.wallhaven4kotlin.util.enumValueOfIgnoreCase
 import org.jsoup.nodes.Document
@@ -28,7 +28,12 @@ import org.jsoup.nodes.Document
  */
 object ListParser : Parser<List<Thumbnail>> {
 
+  private const val LIST_SELECTOR = ".thumb-listing"
   private const val selector = ".thumb-listing .thumb-listing-page ul > li figure"
+
+  fun isNotValid(doc: Document): Boolean {
+    return doc.selectFirst(LIST_SELECTOR) == null
+  }
 
   override fun parseDoc(doc: Document): List<Thumbnail> {
     val elemList = doc.select(selector)

@@ -38,7 +38,7 @@ object UrlHandler {
 
   private val base = HttpUrl.parse(BASE_URL)!!
 
-  fun getWallpaperUrl(id: Long) =
+  fun fromWallpaperId(id: Long) =
     base.newBuilder(WALLPAPER_SEGMENT)
       ?.addPathSegment(id.toString())
       ?.build()
