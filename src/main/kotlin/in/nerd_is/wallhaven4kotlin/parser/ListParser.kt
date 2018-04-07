@@ -16,10 +16,11 @@
 
 package `in`.nerd_is.wallhaven4kotlin.parser
 
-import `in`.nerd_is.wallhaven4kotlin.model.Category
-import `in`.nerd_is.wallhaven4kotlin.model.Purity
+import `in`.nerd_is.wallhaven4kotlin.model.enums.Category
+import `in`.nerd_is.wallhaven4kotlin.model.enums.Purity
 import `in`.nerd_is.wallhaven4kotlin.model.Thumbnail
 import `in`.nerd_is.wallhaven4kotlin.util.enumNames
+import `in`.nerd_is.wallhaven4kotlin.util.enumValueOfIgnoreCase
 import org.jsoup.nodes.Document
 
 /**
@@ -50,8 +51,8 @@ object ListParser : Parser<List<Thumbnail>> {
       for (item in classNames) {
         val name = item.toUpperCase()
         when (name) {
-          in enumNames<Purity>() -> purity = Purity.valueOf(name)
-          in enumNames<Category>() -> category = Category.valueOf(name)
+          in enumNames<Purity>() -> purity = enumValueOfIgnoreCase(name)
+          in enumNames<Category>() -> category = enumValueOfIgnoreCase(name)
         }
       }
 

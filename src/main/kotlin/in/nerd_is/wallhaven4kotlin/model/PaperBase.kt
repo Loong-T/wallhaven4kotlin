@@ -12,14 +12,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
+package `in`.nerd_is.wallhaven4kotlin.model
 
-package `in`.nerd_is.wallhaven4kotlin.model;
+import `in`.nerd_is.wallhaven4kotlin.util.Constant
 
 /**
- * Created by Xuqiang ZHENG on 18/3/9.
+ * @author Xuqiang ZHENG on 18/3/14.
  */
-enum class Purity {
-  SFW, SKETCHY, NSFW
+abstract class PaperBase(id: Long) {
+  val thumbnailUrl = Constant.THUMBNAIL_TEMPLATE.format(id)
 }

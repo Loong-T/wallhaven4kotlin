@@ -16,15 +16,21 @@
 
 package `in`.nerd_is.wallhaven4kotlin.parser
 
-import `in`.nerd_is.wallhaven4kotlin.model.Purity
+import `in`.nerd_is.wallhaven4kotlin.model.enums.Purity
+import `in`.nerd_is.wallhaven4kotlin.util.enumValueOfIgnoreCase
 import org.jsoup.nodes.Document
 
+/**
+ * @author Xuqiang ZHENG on 18/3/13.
+ */
 object PurityParser : Parser<Purity> {
 
   private const val selector = "#wallpaper-purity-form input[checked=checked]"
 
   override fun parseDoc(doc: Document): Purity {
-    return Purity.valueOf(doc.selectFirst(selector).`val`().toUpperCase())
+    val checked = doc.selectFirst(selector)
+    val label = checked.nextElementSibling()
+    return enumValueOfIgnoreCase(label.text())
   }
 
 }

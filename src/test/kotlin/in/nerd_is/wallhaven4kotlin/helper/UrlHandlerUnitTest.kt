@@ -16,6 +16,11 @@
 
 package `in`.nerd_is.wallhaven4kotlin.helper
 
+import `in`.nerd_is.wallhaven4kotlin.model.enums.Order
+import `in`.nerd_is.wallhaven4kotlin.model.enums.Purity
+import `in`.nerd_is.wallhaven4kotlin.model.enums.Sorting
+import `in`.nerd_is.wallhaven4kotlin.query.query
+import `in`.nerd_is.wallhaven4kotlin.util.allOf
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
@@ -27,7 +32,25 @@ class UrlHandlerUnitTest {
   @Test
   fun testWallpaperUrl_allRight() {
     val url = UrlHandler.getWallpaperUrl(333898)
-    assertThat("url equals", url,
-      equalTo("https://alpha.wallhaven.cc/wallpaper/333898"))
+    assertThat(
+      "url equals", url,
+      equalTo("https://alpha.wallhaven.cc/wallpaper/333898")
+    )
+  }
+
+  @Test
+  fun testFromQueryToUrl_allRight() {
+    val query = query {
+      keywords = ""
+      page = 2
+      categories = allOf()
+      purity(Purity.SFW, Purity.SKETCHY)
+      sorting = Sorting.RANDOM
+      order = Order.DESCENDING
+    }
+    assertThat(
+      "random url matches", UrlHandler.fromQuery(query),
+      equalTo("https://alpha.wallhaven.cc/search?q=&categories=111&purity=110&sorting=random&order=desc&page=2")
+    )
   }
 }

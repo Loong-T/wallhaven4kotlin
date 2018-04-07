@@ -12,29 +12,16 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
-package `in`.nerd_is.wallhaven4kotlin.model
+package `in`.nerd_is.wallhaven4kotlin.model.enums
 
 /**
- * @author Xuqiang ZHENG on 18/3/9.
+ * @author Xuqiang ZHENG on 18/4/7.
  */
-data class Color(
-  val r: Int,
-  val g: Int,
-  val b: Int
-) {
-  companion object {
-    fun new(hexStr: String): Color {
-      if (hexStr.length != 6) {
-        throw IllegalArgumentException("Length of hex string should be 6")
-      }
+interface BitFieldEnum {
+  val ordinal: Int
 
-      val r = hexStr.substring(0, 2).toInt(16)
-      val g = hexStr.substring(2, 4).toInt(16)
-      val b = hexStr.substring(4).toInt(16)
-      return Color(r, g, b)
-    }
-  }
+  val bitValue: Long
+    get() = (1 shl ordinal).toLong()
 }

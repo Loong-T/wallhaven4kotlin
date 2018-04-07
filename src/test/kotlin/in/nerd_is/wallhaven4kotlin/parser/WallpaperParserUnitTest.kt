@@ -16,7 +16,7 @@
 
 package `in`.nerd_is.wallhaven4kotlin.parser
 
-import `in`.nerd_is.wallhaven4kotlin.model.Purity
+import `in`.nerd_is.wallhaven4kotlin.model.enums.Purity
 import `in`.nerd_is.wallhaven4kotlin.util.getRes
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat

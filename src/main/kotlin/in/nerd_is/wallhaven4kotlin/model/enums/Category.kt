@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package `in`.nerd_is.wallhaven4kotlin.model
+package `in`.nerd_is.wallhaven4kotlin.model.enums
 
 /**
  * @author Xuqiang ZHENG on 18/3/13.
  */
-enum class Category {
-  GENERAL, ANIME, PEOPLE
+enum class Category : BitFieldEnum {
+  PEOPLE, ANIME, GENERAL,
 }

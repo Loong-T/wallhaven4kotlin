@@ -18,7 +18,7 @@
 package `in`.nerd_is.wallhaven4kotlin.model
 
 /**
- * Created by Xuqiang ZHENG on 18/3/9.
+ * @author Xuqiang ZHENG on 18/3/9.
  */
 data class Resolution(
   val width: Int,

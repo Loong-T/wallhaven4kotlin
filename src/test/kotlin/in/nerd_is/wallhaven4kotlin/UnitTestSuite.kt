@@ -17,6 +17,7 @@
 package `in`.nerd_is.wallhaven4kotlin
 
 import `in`.nerd_is.wallhaven4kotlin.helper.UrlHandlerUnitTest
+import `in`.nerd_is.wallhaven4kotlin.model.BitFieldEnumUnitTest
 import `in`.nerd_is.wallhaven4kotlin.model.ColorUnitTest
 import `in`.nerd_is.wallhaven4kotlin.parser.ListPaperUnitTest
 import `in`.nerd_is.wallhaven4kotlin.parser.WallpaperParserUnitTest
@@ -29,6 +30,7 @@ import org.junit.runners.Suite
 @RunWith(Suite::class)
 @Suite.SuiteClasses(
   UrlHandlerUnitTest::class,
+  BitFieldEnumUnitTest::class,
   ColorUnitTest::class,
   WallpaperParserUnitTest::class,
   ListPaperUnitTest::class

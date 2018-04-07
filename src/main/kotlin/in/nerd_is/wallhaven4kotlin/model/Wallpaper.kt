@@ -17,10 +17,12 @@
 
 package `in`.nerd_is.wallhaven4kotlin.model
 
+import `in`.nerd_is.wallhaven4kotlin.model.enums.Category
+import `in`.nerd_is.wallhaven4kotlin.model.enums.Purity
 import java.util.Date
 
 /**
- * Created by Xuqiang ZHENG on 18/3/7.
+ * @author Xuqiang ZHENG on 18/3/7.
  */
 data class Wallpaper(
   val id: Long,
@@ -35,4 +37,4 @@ data class Wallpaper(
   val viewCount: Long,
   val favCount: Long,
   val fullUrl: String
-) : BasePaper(id)
+) : PaperBase(id)

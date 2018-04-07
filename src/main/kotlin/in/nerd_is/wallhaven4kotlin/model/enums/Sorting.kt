@@ -14,10 +14,16 @@
  * limitations under the License.
  */
 
-package `in`.nerd_is.wallhaven4kotlin.util
+package `in`.nerd_is.wallhaven4kotlin.model.enums
 
 /**
- * @author Xuqiang ZHENG on 18/3/14.
+ * @author Xuqiang ZHENG on 18/3/15.
  */
-inline fun <reified T : Enum<T>> enumNames() =
-  enumValues<T>().map { it.name }
+enum class Sorting(val value: String) {
+  RELEVANCE("relevance"),
+  RANDOM("random"),
+  DATE_ADDED("date_added"),
+  VIEWS("views"),
+  FAVORITES("favorites"),
+  TOPLIST("toplist");
+}

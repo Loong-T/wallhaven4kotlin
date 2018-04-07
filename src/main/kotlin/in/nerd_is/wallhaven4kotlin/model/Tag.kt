@@ -17,8 +17,10 @@
 
 package `in`.nerd_is.wallhaven4kotlin.model
 
+import `in`.nerd_is.wallhaven4kotlin.model.enums.Purity
+
 /**
- * Created by Xuqiang ZHENG on 18/3/9.
+ * @author Xuqiang ZHENG on 18/3/9.
  */
 data class Tag(
   val id: Long,

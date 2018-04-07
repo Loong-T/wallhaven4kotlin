@@ -16,13 +16,43 @@
 
 package `in`.nerd_is.wallhaven4kotlin.helper
 
+import `in`.nerd_is.wallhaven4kotlin.query.Query
+import `in`.nerd_is.wallhaven4kotlin.util.bitString
+import okhttp3.HttpUrl
+
 /**
  * @author Xuqiang ZHENG on 18/3/14.
  */
 object UrlHandler {
 
   private const val BASE_URL = "https://alpha.wallhaven.cc"
-  private const val WALLPAPER_SEGMENT = "/wallpaper"
+  private const val WALLPAPER_SEGMENT = "wallpaper"
+  private const val SEARCH_SEGMENT = "search"
 
-  fun getWallpaperUrl(id: Long) = "$BASE_URL$WALLPAPER_SEGMENT/$id"
+  private const val PARAM_Q = "q"
+  private const val PARAM_PAGE = "page"
+  private const val PARAM_CATEGORIES = "categories"
+  private const val PARAM_PURITY = "purity"
+  private const val PARAM_SORTING = "sorting"
+  private const val PARAM_ORDER = "order"
+
+  private val base = HttpUrl.parse(BASE_URL)!!
+
+  fun getWallpaperUrl(id: Long) =
+    base.newBuilder(WALLPAPER_SEGMENT)
+      ?.addPathSegment(id.toString())
+      ?.build()
+      ?.toString()!!
+
+  fun fromQuery(query: Query): String {
+    val builder = base.newBuilder(SEARCH_SEGMENT)
+    builder?.addQueryParameter(PARAM_Q, query.keywords)
+      ?.addQueryParameter(PARAM_CATEGORIES, query.categories.bitString())
+      ?.addQueryParameter(PARAM_PURITY, query.purities.bitString())
+      ?.addQueryParameter(PARAM_SORTING, query.sorting.value)
+      ?.addQueryParameter(PARAM_ORDER, query.order.value)
+      ?.addQueryParameter(PARAM_PAGE, query.page.toString())
+    return builder?.build().toString()
+  }
+
 }

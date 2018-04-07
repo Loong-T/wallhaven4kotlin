@@ -17,8 +17,9 @@
 package `in`.nerd_is.wallhaven4kotlin.parser
 
 import `in`.nerd_is.wallhaven4kotlin.helper.altTitle
-import `in`.nerd_is.wallhaven4kotlin.model.Purity
+import `in`.nerd_is.wallhaven4kotlin.model.enums.Purity
 import `in`.nerd_is.wallhaven4kotlin.model.Tag
+import `in`.nerd_is.wallhaven4kotlin.util.enumValueOfIgnoreCase
 import org.jsoup.nodes.Document
 
 /**
@@ -38,7 +39,7 @@ object TagParser : Parser<List<Tag>> {
         .split(" ")
         .map { it.substringAfter('-', "") }
         .filter { it != "" }
-        .map { Purity.valueOf(it.toUpperCase()) }
+        .map { enumValueOfIgnoreCase<Purity>(it) }
         .first()
       val nameElem = elem.selectFirst(".tagname")
       val name = nameElem.text()

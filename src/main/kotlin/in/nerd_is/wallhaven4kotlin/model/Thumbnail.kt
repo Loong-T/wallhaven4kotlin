@@ -16,6 +16,9 @@
 
 package `in`.nerd_is.wallhaven4kotlin.model
 
+import `in`.nerd_is.wallhaven4kotlin.model.enums.Category
+import `in`.nerd_is.wallhaven4kotlin.model.enums.Purity
+
 /**
  * @author Xuqiang ZHENG on 18/3/14.
  */
@@ -25,4 +28,4 @@ data class Thumbnail(
   val purity: Purity,
   val category: Category,
   val favCount: Long
-) : BasePaper(id)
+) : PaperBase(id)

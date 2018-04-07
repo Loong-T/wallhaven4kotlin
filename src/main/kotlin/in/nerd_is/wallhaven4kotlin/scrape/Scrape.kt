@@ -20,6 +20,8 @@ import `in`.nerd_is.wallhaven4kotlin.helper.UrlHandler
 import `in`.nerd_is.wallhaven4kotlin.model.Wallpaper
 import `in`.nerd_is.wallhaven4kotlin.parser.WallpaperParser
 import `in`.nerd_is.wallhaven4kotlin.parser.WallpaperParser.WALLPAPER_SELECTOR
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
@@ -28,12 +30,16 @@ import org.jsoup.nodes.Document
  */
 object Scrape {
 
+  private val client = OkHttpClient()
+
   fun get(id: Long): Wallpaper {
     return WallpaperParser.parseDoc(scrapeWallpaperPage(id))
   }
 
   private fun scrapeWallpaperPage(id: Long): Document {
-    val document = Jsoup.connect(UrlHandler.getWallpaperUrl(id)).get()!!
+    val request = Request.Builder().url(UrlHandler.getWallpaperUrl(id)).build()
+    val response = client.newCall(request).execute()
+    val document = Jsoup.parse(response.body()?.string())
     if (document.selectFirst(WALLPAPER_SELECTOR) == null)
       throw IllegalArgumentException("Wallpaper with id $id do not exists")
 

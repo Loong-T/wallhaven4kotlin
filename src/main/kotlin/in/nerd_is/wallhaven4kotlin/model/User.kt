@@ -18,12 +18,11 @@
 package `in`.nerd_is.wallhaven4kotlin.model
 
 /**
- * Created by Xuqiang ZHENG on 18/3/9.
+ * @author Xuqiang ZHENG on 18/3/9.
  */
 data class User(
   val name: String,
   val avatarThumbnail: String = "",
   val groupName: String = "",
   val description: String = ""
-) {
-}
+)

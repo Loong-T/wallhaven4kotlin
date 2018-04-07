@@ -17,6 +17,7 @@
 import `in`.nerd_is.wallhaven4kotlin.scrape.Scrape
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.notNullValue
+import org.jsoup.HttpStatusException
 import org.junit.Test
 
 import org.junit.Assert.*

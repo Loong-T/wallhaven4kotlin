@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package `in`.nerd_is.wallhaven4kotlin.model
 
-import `in`.nerd_is.wallhaven4kotlin.util.Constant
+package `in`.nerd_is.wallhaven4kotlin.model.enums
 
 /**
- * @author Xuqiang ZHENG on 18/3/14.
+ * @author Xuqiang ZHENG on 18/3/9.
  */
-abstract class BasePaper(id: Long) {
-  val thumbnailUrl = Constant.THUMBNAIL_TEMPLATE.format(id)
+enum class Purity : BitFieldEnum {
+  NSFW, SKETCHY, SFW,
 }
