@@ -9,10 +9,11 @@ buildscript {
     }
 }
 
-group 'nerd-is.in'
-version '0.1'
+group = "in.nerd_is.wallhaven4kotlin"
+version = "0.1.0"
 
 apply plugin: 'kotlin'
+apply plugin: 'maven'
 
 repositories {
     jcenter()
