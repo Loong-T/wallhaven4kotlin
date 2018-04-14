@@ -38,14 +38,25 @@ object WallHaven {
   }
 
   fun random(keywords: String = ""): List<Thumbnail> {
-    val randomQuery = query {
+    val query = query {
       this.keywords = keywords
       sorting = Sorting.RANDOM
       categories = configuration.categories
       purities = configuration.purities
       order = configuration.order
     }
-    return search(randomQuery)
+    return search(query)
+  }
+
+  fun latest(keywords: String = ""): List<Thumbnail> {
+    val query = query {
+      this.keywords = keywords
+      sorting = Sorting.DATE_ADDED
+      categories = configuration.categories
+      purities = configuration.purities
+      order = configuration.order
+    }
+    return search(query)
   }
 
   fun search(query: Query): List<Thumbnail> {
