@@ -37,7 +37,7 @@ object WallHaven {
     return scrapeWallpaper(fromWallpaperId(id))
   }
 
-  fun random(keywords: String = ""): List<Thumbnail> {
+  fun random(keywords: String = "", page: Long = 1L): List<Thumbnail> {
     val query = query {
       this.keywords = keywords
       sorting = Sorting.RANDOM
@@ -48,13 +48,14 @@ object WallHaven {
     return search(query)
   }
 
-  fun latest(keywords: String = ""): List<Thumbnail> {
+  fun latest(keywords: String = "", page: Long = 1L): List<Thumbnail> {
     val query = query {
       this.keywords = keywords
       sorting = Sorting.DATE_ADDED
       categories = configuration.categories
       purities = configuration.purities
       order = configuration.order
+      this.page = page
     }
     return search(query)
   }
