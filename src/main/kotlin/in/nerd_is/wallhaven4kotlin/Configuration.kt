@@ -16,10 +16,7 @@
 
 package `in`.nerd_is.wallhaven4kotlin
 
-import `in`.nerd_is.wallhaven4kotlin.model.enums.Category
-import `in`.nerd_is.wallhaven4kotlin.model.enums.Order
-import `in`.nerd_is.wallhaven4kotlin.model.enums.Purity
-import `in`.nerd_is.wallhaven4kotlin.model.enums.Sorting
+import `in`.nerd_is.wallhaven4kotlin.model.enums.*
 import `in`.nerd_is.wallhaven4kotlin.util.allOf
 import `in`.nerd_is.wallhaven4kotlin.util.enumSetOf
 import java.util.EnumSet
@@ -39,6 +36,7 @@ class Configuration(
     val DEFAULT_PURITY = enumSetOf(Purity.SFW, Purity.SKETCHY)
     val DEFAULT_SORTING = Sorting.RELEVANCE
     val DEFAULT_ORDER = Order.DESCENDING
+    val DEFAULT_TOP_RANGE = TopRange.LAST_MONTH
 
     val DEFAULT = Configuration()
   }

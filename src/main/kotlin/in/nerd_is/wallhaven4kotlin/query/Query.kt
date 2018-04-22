@@ -20,10 +20,8 @@ import `in`.nerd_is.wallhaven4kotlin.Configuration.Companion.DEFAULT_CATEGORY
 import `in`.nerd_is.wallhaven4kotlin.Configuration.Companion.DEFAULT_ORDER
 import `in`.nerd_is.wallhaven4kotlin.Configuration.Companion.DEFAULT_PURITY
 import `in`.nerd_is.wallhaven4kotlin.Configuration.Companion.DEFAULT_SORTING
-import `in`.nerd_is.wallhaven4kotlin.model.enums.Category
-import `in`.nerd_is.wallhaven4kotlin.model.enums.Order
-import `in`.nerd_is.wallhaven4kotlin.model.enums.Purity
-import `in`.nerd_is.wallhaven4kotlin.model.enums.Sorting
+import `in`.nerd_is.wallhaven4kotlin.Configuration.Companion.DEFAULT_TOP_RANGE
+import `in`.nerd_is.wallhaven4kotlin.model.enums.*
 import `in`.nerd_is.wallhaven4kotlin.util.enumSetOf
 import java.util.EnumSet
 
@@ -36,7 +34,8 @@ class Query(
   var categories: EnumSet<Category> = DEFAULT_CATEGORY,
   var purities: EnumSet<Purity> = DEFAULT_PURITY,
   var sorting: Sorting = DEFAULT_SORTING,
-  var order: Order = DEFAULT_ORDER
+  var order: Order = DEFAULT_ORDER,
+  var topRange: TopRange = DEFAULT_TOP_RANGE
 ) {
 
   fun category(vararg categories: Category) {
@@ -54,6 +53,7 @@ class Query(
     private var purities = DEFAULT_PURITY
     private var sorting = DEFAULT_SORTING
     private var order = DEFAULT_ORDER
+    private var topRange = DEFAULT_TOP_RANGE
 
     fun keywords(keywords: String): Builder {
       this.keywords = keywords
@@ -85,8 +85,13 @@ class Query(
       return this
     }
 
+    fun topRange(topRange: TopRange): Builder {
+      this.topRange = topRange
+      return this
+    }
+
     fun build(): Query {
-      return Query(keywords, page, categories, purities, sorting, order)
+      return Query(keywords, page, categories, purities, sorting, order, topRange)
     }
   }
 

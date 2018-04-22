@@ -16,6 +16,7 @@
 
 package `in`.nerd_is.wallhaven4kotlin.helper
 
+import `in`.nerd_is.wallhaven4kotlin.model.enums.Sorting
 import `in`.nerd_is.wallhaven4kotlin.query.Query
 import `in`.nerd_is.wallhaven4kotlin.util.bitString
 import okhttp3.HttpUrl
@@ -35,6 +36,7 @@ object UrlHandler {
   private const val PARAM_PURITY = "purity"
   private const val PARAM_SORTING = "sorting"
   private const val PARAM_ORDER = "order"
+  private const val PARAM_TOP_RANGE = "topRange"
 
   private val base = HttpUrl.parse(BASE_URL)!!
 
@@ -52,6 +54,11 @@ object UrlHandler {
       ?.addQueryParameter(PARAM_SORTING, query.sorting.value)
       ?.addQueryParameter(PARAM_ORDER, query.order.value)
       ?.addQueryParameter(PARAM_PAGE, query.page.toString())
+
+    if (query.sorting == Sorting.TOPLIST) {
+      builder?.addQueryParameter(PARAM_TOP_RANGE, query.topRange.value)
+    }
+
     return builder?.build().toString()
   }
 
