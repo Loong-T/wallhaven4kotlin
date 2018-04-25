@@ -25,10 +25,10 @@ import java.util.EnumSet
  * @author Xuqiang ZHENG on 18/4/7.
  */
 class Configuration(
-  val categories: EnumSet<Category> = DEFAULT_CATEGORY,
-  val purities: EnumSet<Purity> = DEFAULT_PURITY,
-  val sorting: Sorting = DEFAULT_SORTING,
-  val order: Order = DEFAULT_ORDER
+  var categories: EnumSet<Category> = DEFAULT_CATEGORY,
+  var purities: EnumSet<Purity> = DEFAULT_PURITY,
+  var sorting: Sorting = DEFAULT_SORTING,
+  var order: Order = DEFAULT_ORDER
 ) {
 
   companion object {
