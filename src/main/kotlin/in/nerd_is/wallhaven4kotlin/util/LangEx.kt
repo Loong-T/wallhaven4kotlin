@@ -45,8 +45,9 @@ fun <E> EnumSet<E>.sumBits(): Long
   return this.fold(0L) { acc, e -> acc + e.bitValue }
 }
 
-fun <E> EnumSet<E>.bitString(): String
+inline fun <reified E> EnumSet<E>.bitString(): String
     where E : Enum<E>,
           E : BitFieldEnum {
-  return this.sumBits().toString(2)
+  val s = this.sumBits().toString(2)
+  return s.padStart(allOf<E>().size, '0')
 }

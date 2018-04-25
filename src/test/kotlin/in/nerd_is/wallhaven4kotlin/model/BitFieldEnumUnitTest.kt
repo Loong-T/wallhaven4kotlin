@@ -46,10 +46,13 @@ class BitFieldEnumUnitTest {
 
   @Test
   fun testBitString_allRight() {
-    val categorySet = allOf<Category>()
-    assertThat("sum is 111", categorySet.bitString(), equalTo("111"))
+    var categorySet = allOf<Category>()
+    assertThat("bit string is 111", categorySet.bitString(), equalTo("111"))
+
+    categorySet = enumSetOf(Category.ANIME)
+    assertThat("bit string is 010", categorySet.bitString(), equalTo("010"))
 
     val puritySet = enumSetOf(Purity.SFW, Purity.SKETCHY)
-    assertThat("sum is 110", puritySet.bitString(), equalTo("110"))
+    assertThat("bit string is 110", puritySet.bitString(), equalTo("110"))
   }
 }
