@@ -24,7 +24,7 @@ import java.util.EnumSet
 /**
  * @author Xuqiang ZHENG on 18/4/7.
  */
-class Configuration(
+data class Configuration(
   var categories: EnumSet<Category> = DEFAULT_CATEGORY,
   var purities: EnumSet<Purity> = DEFAULT_PURITY,
   var sorting: Sorting = DEFAULT_SORTING,
