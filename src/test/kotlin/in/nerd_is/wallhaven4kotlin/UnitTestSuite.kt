@@ -33,6 +33,7 @@ import org.junit.runners.Suite
   BitFieldEnumUnitTest::class,
   ColorUnitTest::class,
   WallpaperParserUnitTest::class,
-  ListPaperUnitTest::class
+  ListPaperUnitTest::class,
+  ConfigurationUnitTest::class
 )
 class UnitTestSuite

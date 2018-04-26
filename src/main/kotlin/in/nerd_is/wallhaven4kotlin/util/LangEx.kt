@@ -33,7 +33,7 @@ inline fun <reified E : Enum<E>> enumValueOfIgnoreCase(value: String): E {
 
 inline fun <reified E : Enum<E>> enumSetOf(vararg args: E): EnumSet<E> {
   val set = EnumSet.noneOf(E::class.java)
-  args.forEach { set.add(it) }
+  for (item in args) set.add(item)
   return set
 }
 

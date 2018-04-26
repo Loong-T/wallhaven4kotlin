@@ -33,7 +33,7 @@ import `in`.nerd_is.wallhaven4kotlin.scrape.Scrape.scrapeWallpaper
  */
 object WallHaven {
 
-  var configuration = Configuration.DEFAULT
+  var configuration = Configuration()
 
   fun getWallpaper(id: Long): Wallpaper {
     return scrapeWallpaper(fromWallpaperId(id))
