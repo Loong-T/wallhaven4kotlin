@@ -18,10 +18,7 @@ package `in`.nerd_is.wallhaven4kotlin.model
 
 import `in`.nerd_is.wallhaven4kotlin.model.enums.Category
 import `in`.nerd_is.wallhaven4kotlin.model.enums.Purity
-import `in`.nerd_is.wallhaven4kotlin.util.allOf
-import `in`.nerd_is.wallhaven4kotlin.util.bitString
-import `in`.nerd_is.wallhaven4kotlin.util.enumSetOf
-import `in`.nerd_is.wallhaven4kotlin.util.sumBits
+import `in`.nerd_is.wallhaven4kotlin.util.*
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
@@ -54,5 +51,16 @@ class BitFieldEnumUnitTest {
 
     val puritySet = enumSetOf(Purity.SFW, Purity.SKETCHY)
     assertThat("bit string is 110", puritySet.bitString(), equalTo("110"))
+  }
+
+  @Test
+  fun testSumBits_allRight() {
+    var set = allOf<Category>()
+    var sum = set.sumBits()
+    assertThat(set, equalTo(sum.enumSet()))
+
+    set = enumSetOf(Category.ANIME, Category.PEOPLE)
+    sum = set.sumBits()
+    assertThat(set, equalTo(sum.enumSet()))
   }
 }

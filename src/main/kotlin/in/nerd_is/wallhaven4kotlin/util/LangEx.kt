@@ -45,6 +45,25 @@ fun <E> EnumSet<E>.sumBits(): Long
   return this.fold(0L) { acc, e -> acc + e.bitValue }
 }
 
+inline fun <reified E> Long.enumSet(): EnumSet<E>
+    where E : Enum<E>,
+          E : BitFieldEnum {
+  val enums = enumValues<E>()
+  val set = EnumSet.noneOf(E::class.java)
+  var value = this
+  var ordinal = 0
+  while (value != 0L) {
+    val bit = value.shr(ordinal).and(1)
+    if (bit == 1L) {
+      set.add(enums[ordinal])
+    }
+
+    ordinal += 1
+    value = value shr 1
+  }
+  return set
+}
+
 inline fun <reified E> EnumSet<E>.bitString(): String
     where E : Enum<E>,
           E : BitFieldEnum {
