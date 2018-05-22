@@ -73,7 +73,12 @@ object WallpaperParser : Parser<Wallpaper> {
             .replace(",", "").toLong()
         }
         "Favorites" -> {
-          favCount = child.nextElementSibling().child(0).text().toLong()
+          val sibling = child.nextElementSibling()
+          favCount = if (sibling.children().isEmpty()) {
+            sibling.text().toLong()
+          } else {
+            sibling.child(0).text().toLong()
+          }
         }
       }
     }

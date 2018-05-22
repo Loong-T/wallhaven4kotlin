@@ -30,8 +30,8 @@ class WallHavenTest {
 
   @Test
   fun testGetWallpaper_allRight() {
-    val id = 333898L
-    val wallpaper = WallHaven.getWallpaper(333898)
+    val id = 657384L
+    val wallpaper = WallHaven.getWallpaper(id)
 
     assertThat("wallpaper not null", wallpaper, notNullValue())
     assertThat("wallpaper id equals", wallpaper.id, equalTo(id))
