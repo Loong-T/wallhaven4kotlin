@@ -38,7 +38,7 @@ object WallpaperParser : Parser<Wallpaper> {
 
     val paperElem = doc.selectFirst(WALLPAPER_SELECTOR)
     val id = paperElem.attr("data-wallpaper-id").toLong()
-    val fullUrl = paperElem.attr("src")
+    val fullUrl = "https:" + paperElem.attr("src")
 
     val resolution = ResolutionParser.parseDoc(doc)
     val colors = ColorParser.parseDoc(doc)
