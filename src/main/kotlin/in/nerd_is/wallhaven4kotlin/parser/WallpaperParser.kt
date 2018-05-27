@@ -50,7 +50,10 @@ object WallpaperParser : Parser<Wallpaper> {
 
     val timeStr = dlElem.selectFirst(".showcase-uploader time")
       .attr("datetime")
-    val date = SimpleDateFormat(DATE_FORMAT).parse(timeStr)
+    // Android under 7.0 do not support date format X
+    // so, remove last colon to match pattern Z
+    val lastIndex = timeStr.lastIndexOf(":")
+    val date = SimpleDateFormat(DATE_FORMAT).parse(timeStr.removeRange(lastIndex, lastIndex + 1))
 
     lateinit var category: Category
     lateinit var size: String
