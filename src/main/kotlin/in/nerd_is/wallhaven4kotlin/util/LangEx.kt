@@ -50,16 +50,14 @@ inline fun <reified E> Long.enumSet(): EnumSet<E>
           E : BitFieldEnum {
   val enums = enumValues<E>()
   val set = EnumSet.noneOf(E::class.java)
-  var value = this
   var ordinal = 0
-  while (value != 0L) {
-    val bit = value.shr(ordinal).and(1)
+  while (ordinal < enums.size) {
+    val bit = this.shr(ordinal).and(1)
     if (bit == 1L) {
       set.add(enums[ordinal])
     }
 
     ordinal += 1
-    value = value shr 1
   }
   return set
 }

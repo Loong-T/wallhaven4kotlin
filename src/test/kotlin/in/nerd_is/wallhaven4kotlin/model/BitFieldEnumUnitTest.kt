@@ -57,10 +57,10 @@ class BitFieldEnumUnitTest {
   fun testSumBits_allRight() {
     var set = allOf<Category>()
     var sum = set.sumBits()
-    assertThat(set, equalTo(sum.enumSet()))
+    assertThat(sum.enumSet(), equalTo(set))
 
     set = enumSetOf(Category.ANIME, Category.PEOPLE)
     sum = set.sumBits()
-    assertThat(set, equalTo(sum.enumSet()))
+    assertThat(sum.enumSet(), equalTo(set))
   }
 }
