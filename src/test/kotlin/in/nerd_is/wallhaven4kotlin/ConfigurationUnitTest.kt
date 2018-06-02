@@ -29,6 +29,23 @@ import org.junit.Test
  * @author Xuqiang ZHENG on 18/4/26.
  */
 class ConfigurationUnitTest {
+
+  @Test
+  fun testConfigurationEquals_allRight() {
+    val config1 = Configuration()
+    val config2 = Configuration()
+    val config3 = config1.deepCopy()
+
+    assertThat("should equal", config1, equalTo(config3))
+
+    config1.purities.add(Purity.NSFW)
+    assertThat("not equal", config1, not(equalTo(config3)))
+    assertThat("should not share the same purities", config2.purities, not(equalTo(config1.purities)))
+
+    config3.purities.add(Purity.NSFW)
+    assertThat("equals again", config1, equalTo(config3))
+  }
+
   @Test
   fun testConfigurationDeepCopy_allRight() {
     val config1 = Configuration()
@@ -49,19 +66,5 @@ class ConfigurationUnitTest {
     config1.order = Order.ASCENDING
     assertThat("default order is not ascending", Configuration.DEFAULT_ORDER, not(equalTo(Order.ASCENDING)))
     assertThat("order is copied", config2.order, equalTo(Configuration.DEFAULT_ORDER))
-  }
-
-  @Test
-  fun testConfigurationEquals_allRight() {
-    val config1 = Configuration()
-    val config2 = config1.deepCopy()
-
-    assertThat("should equal", config1, equalTo(config2))
-
-    config1.purities.add(Purity.NSFW)
-    assertThat("not equal", config1, not(equalTo(config2)))
-
-    config2.purities.add(Purity.NSFW)
-    assertThat("equals again", config1, equalTo(config2))
   }
 }

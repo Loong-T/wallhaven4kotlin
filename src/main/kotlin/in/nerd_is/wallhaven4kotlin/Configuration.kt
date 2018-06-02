@@ -31,18 +31,25 @@ data class Configuration(
   var order: Order = DEFAULT_ORDER
 ) {
 
-  fun deepCopy(categories: EnumSet<Category> = this.categories,
-           purities: EnumSet<Purity> = this.purities,
-           sorting: Sorting = this.sorting,
-           order: Order = this.order): Configuration {
+  fun deepCopy(
+    categories: EnumSet<Category> = this.categories,
+    purities: EnumSet<Purity> = this.purities,
+    sorting: Sorting = this.sorting,
+    order: Order = this.order
+  ): Configuration {
     return Configuration(categories.clone(), purities.clone(), sorting, order)
   }
 
   companion object {
-    val DEFAULT_CATEGORY = allOf<Category>()
-    val DEFAULT_PURITY = enumSetOf(Purity.SFW, Purity.SKETCHY)
-    val DEFAULT_SORTING = Sorting.RELEVANCE
-    val DEFAULT_ORDER = Order.DESCENDING
-    val DEFAULT_TOP_RANGE = TopRange.LAST_MONTH
+    val DEFAULT_CATEGORY
+      get() = allOf<Category>()
+    val DEFAULT_PURITY
+      get() = enumSetOf(Purity.SFW, Purity.SKETCHY)
+    val DEFAULT_SORTING
+      get() = Sorting.RELEVANCE
+    val DEFAULT_ORDER
+      get() = Order.DESCENDING
+    val DEFAULT_TOP_RANGE
+      get() = TopRange.LAST_MONTH
   }
 }
