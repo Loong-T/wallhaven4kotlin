@@ -28,16 +28,18 @@ data class Configuration(
   var categories: EnumSet<Category> = DEFAULT_CATEGORY,
   var purities: EnumSet<Purity> = DEFAULT_PURITY,
   var sorting: Sorting = DEFAULT_SORTING,
-  var order: Order = DEFAULT_ORDER
+  var order: Order = DEFAULT_ORDER,
+  var topRange: TopRange = DEFAULT_TOP_RANGE
 ) {
 
   fun deepCopy(
     categories: EnumSet<Category> = this.categories,
     purities: EnumSet<Purity> = this.purities,
     sorting: Sorting = this.sorting,
-    order: Order = this.order
+    order: Order = this.order,
+    topRange: TopRange = this.topRange
   ): Configuration {
-    return Configuration(categories.clone(), purities.clone(), sorting, order)
+    return Configuration(categories.clone(), purities.clone(), sorting, order, topRange)
   }
 
   companion object {
