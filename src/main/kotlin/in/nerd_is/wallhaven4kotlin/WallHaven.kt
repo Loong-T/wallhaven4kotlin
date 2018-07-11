@@ -16,13 +16,11 @@
 
 package `in`.nerd_is.wallhaven4kotlin
 
-import `in`.nerd_is.wallhaven4kotlin.Configuration.Companion.DEFAULT_TOP_RANGE
 import `in`.nerd_is.wallhaven4kotlin.helper.UrlHandler.fromQuery
 import `in`.nerd_is.wallhaven4kotlin.helper.UrlHandler.fromWallpaperId
 import `in`.nerd_is.wallhaven4kotlin.model.Thumbnail
 import `in`.nerd_is.wallhaven4kotlin.model.Wallpaper
 import `in`.nerd_is.wallhaven4kotlin.model.enums.Sorting
-import `in`.nerd_is.wallhaven4kotlin.model.enums.TopRange
 import `in`.nerd_is.wallhaven4kotlin.query.Query
 import `in`.nerd_is.wallhaven4kotlin.query.query
 import `in`.nerd_is.wallhaven4kotlin.scrape.Scrape.scrapeList
@@ -64,14 +62,13 @@ object WallHaven {
 
   fun toplist(
     keywords: String = "",
-    page: Long = 1L,
-    topRange: TopRange = DEFAULT_TOP_RANGE
+    page: Long = 1L
   ): List<Thumbnail> {
     val query = query {
       this.keywords = keywords
       this.page = page
       sorting = Sorting.TOPLIST
-      this.topRange = topRange
+      topRange = configuration.topRange
       categories = configuration.categories
       purities = configuration.purities
       order = configuration.order
